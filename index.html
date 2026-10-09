@@ -10,12 +10,18 @@
   <meta property="og:type" content="website">
   <meta property="og:title" content="เครื่องคำนวณกำไรจริงต่อเมนู Grab | รู้ต้นทุน รู้กำไร">
   <meta property="og:description" content="ขาย 1 จานได้กำไรกี่บาทกันแน่? หัก GP 30% (+VAT 7%) ต้นทุน กล่อง ส่วนลด เหลือเงินสุทธิเท่าไร คำนวณฟรี!">
-  <meta property="og:image" content="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&h=630&fit=crop&q=80">
+  <meta property="og:url" content="https://chargcharg2308-cloud.github.io/grab-income/">
+  <meta property="og:image" content="https://chargcharg2308-cloud.github.io/grab-income/og-image.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:locale" content="th_TH">
+  <link rel="canonical" href="https://chargcharg2308-cloud.github.io/grab-income/">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
   <meta name="twitter:title" content="เครื่องคำนวณกำไรจริงต่อเมนู Grab">
   <meta name="twitter:description" content="คำนวณกำไรสุทธิต่อจานบน Grab รวมหัก GP + VAT 7% บรรจุภัณฑ์ และต้นทุน">
+  <meta name="twitter:image" content="https://chargcharg2308-cloud.github.io/grab-income/og-image.png">
   
   <!-- Theme Color for Mobile Browsers -->
   <meta name="theme-color" content="#0d111c">
@@ -23,6 +29,7 @@
 
   <!-- Favicon (Inline SVG) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍱</text></svg>">
+  <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
   <!-- Google Font -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -583,9 +590,9 @@
     /* Toast Notification */
     .toast {
       position: fixed;
-      bottom: 24px;
+      top: calc(16px + env(safe-area-inset-top));
       left: 50%;
-      transform: translateX(-50%) translateY(100px);
+      transform: translateX(-50%) translateY(-120px);
       background: hsla(230, 30%, 14%, 0.95);
       border: 1px solid var(--accent);
       color: var(--text);
@@ -603,6 +610,47 @@
       transform: translateX(-50%) translateY(0);
       opacity: 1;
     }
+
+    /* Mobile live-profit bar: keeps the result visible while typing on phones */
+    .mobile-bar {
+      display: none;
+      position: fixed;
+      left: max(12px, env(safe-area-inset-left));
+      right: max(12px, env(safe-area-inset-right));
+      bottom: calc(12px + env(safe-area-inset-bottom));
+      z-index: 60;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 10px 16px;
+      min-height: 60px;
+      text-align: left;
+      color: var(--text);
+      background: hsla(230, 30%, 12%, 0.92);
+      border: 1px solid var(--border-focus);
+      border-radius: 16px;
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      box-shadow: 0 12px 30px -8px rgba(0,0,0,.7);
+      opacity: 0;
+      transform: translateY(24px);
+      pointer-events: none;
+      transition: opacity .25s, transform .25s;
+    }
+    .mobile-bar.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
+    .mb-left small { display: block; font-size: 11.5px; color: var(--muted); font-weight: 400; }
+    .mb-value { font-size: 20px; font-weight: 700; line-height: 1.2; }
+    .mb-value.good { color: var(--good); }
+    .mb-value.warn { color: var(--warn); }
+    .mb-value.bad { color: var(--bad); }
+    .mb-value.idle { color: var(--muted); }
+    .mb-right { display: flex; align-items: center; gap: 8px; }
+    .mb-link { font-size: 12px; color: var(--muted); font-weight: 500; }
+    @media (max-width: 860px) {
+      .mobile-bar { display: flex; }
+      body { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+    }
+    @media (max-width: 340px) { .mb-link { display: none; } }
 
     /* Footer Notes & Credit */
     .footer-note {
@@ -742,7 +790,7 @@
 
         <div class="share-btn-wrap">
           <button type="button" class="share-btn" id="copyShareBtn">
-            <span>📋 คัดลอกสรุปกำไร (ส่งต่อใน LINE)</span>
+            <span>📤 แชร์สรุปกำไร (ส่งต่อใน LINE)</span>
           </button>
         </div>
       </div>
@@ -792,6 +840,11 @@
     </div>
   </main>
 
+  <button type="button" class="mobile-bar" id="mobileBar" aria-label="ดูรายละเอียดกำไร">
+    <span class="mb-left"><small>กำไรจริง/จาน</small><b class="mb-value idle" id="mbProfit">฿0.00</b></span>
+    <span class="mb-right"><span class="pill s-idle" id="mbMargin">-</span><span class="mb-link">ดูรายละเอียด ↓</span></span>
+  </button>
+
   <div class="toast" id="toast">คัดลอกข้อความสรุปแล้ว!</div>
 
   <script>
@@ -802,6 +855,11 @@
 
     let menus = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem('grab-profit-menus') || '[]');
     let editingId = null;
+    let hasInput = false, resultVisible = false;
+
+    function updateMobileBar() {
+      $('mobileBar').classList.toggle('show', hasInput && !resultVisible);
+    }
 
     function calc({ price, cost, pack, discount, gp, target, hasVat }) {
       const effectiveGp = hasVat ? (gp * 1.07) : gp;
@@ -877,6 +935,13 @@
       $('tBreak').textContent = isFinite(r.breakEven) ? baht(r.breakEven) + ' (ต่ำกว่านี้ขาดทุน)' : '-';
       $('tTargetPct').textContent = d.target;
       $('tSuggest').textContent = r.suggest ? baht(r.suggest) : 'เป็นไปไม่ได้ (GP + margin รวมเกิน 100%)';
+
+      $('mbProfit').textContent = baht(r.profit);
+      $('mbProfit').className = 'mb-value ' + lv;
+      $('mbMargin').textContent = d.price > 0 ? (r.margin * 100).toFixed(1) + '%' : '-';
+      $('mbMargin').className = 'pill s-' + lv;
+      hasInput = d.price > 0;
+      updateMobileBar();
     }
 
     function renderTable() {
@@ -977,6 +1042,27 @@
       setTimeout(() => toast.classList.remove('show'), 2400);
     }
 
+    function copyText(text) {
+      const done = () => showToast('คัดลอกสรุปแล้ว พร้อมวางส่งใน LINE ✅');
+      const fallback = () => {
+        const ta = document.createElement('textarea');
+        ta.value = text;
+        ta.setAttribute('readonly', '');
+        ta.style.position = 'fixed';
+        ta.style.opacity = '0';
+        document.body.appendChild(ta);
+        ta.select();
+        try { document.execCommand('copy') ? done() : showToast('คัดลอกไม่สำเร็จ'); }
+        catch (e) { showToast('คัดลอกไม่สำเร็จ'); }
+        document.body.removeChild(ta);
+      };
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(text).then(done).catch(fallback);
+      } else {
+        fallback();
+      }
+    }
+
     function copySummary() {
       const d = readForm();
       const r = calc(d);
@@ -995,16 +1081,10 @@
 🎯 ราคาคุ้มทุน: ${isFinite(r.breakEven) ? baht(r.breakEven) : '-'}
 📈 ราคาแนะนำ (Margin ${d.target}%): ${r.suggest ? baht(r.suggest) : '-'}`;
 
-      if (navigator.clipboard && navigator.clipboard.writeText) {
-        navigator.clipboard.writeText(text).then(() => showToast('คัดลอกสรุปแล้ว พร้อมวางส่งใน LINE ✅'));
+      if (navigator.share && matchMedia('(pointer: coarse)').matches) {
+        navigator.share({ text }).catch(err => { if (!err || err.name !== 'AbortError') copyText(text); });
       } else {
-        const ta = document.createElement('textarea');
-        ta.value = text;
-        document.body.appendChild(ta);
-        ta.select();
-        document.execCommand('copy');
-        document.body.removeChild(ta);
-        showToast('คัดลอกสรุปแล้ว พร้อมวางส่งใน LINE ✅');
+        copyText(text);
       }
     }
 
@@ -1050,7 +1130,7 @@
         if (!m) return;
         editingId = m.id;
         ['name', 'price', 'cost', 'pack', 'discount', 'gp', 'target'].forEach(k => $(k).value = m[k] !== undefined ? m[k] : 0);
-        $('vatCheckbox').checked = m.hasVat !== undefined ? m.hasVat : true;
+        $('vatCheckbox').checked = !!m.hasVat; // เมนูจากเวอร์ชันแรกคำนวณแบบไม่รวม VAT
         $('saveBtn').textContent = '✏️ อัปเดตเมนู';
         $('editingName').textContent = m.name;
         $('editBanner').classList.add('active');
@@ -1071,6 +1151,15 @@
       const btn = e.target.closest('button');
       if (btn) handleEditOrDelete(btn);
     });
+
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(([entry]) => {
+        resultVisible = entry.isIntersecting;
+        updateMobileBar();
+      }, { threshold: 0.2 }).observe(document.querySelector('.result'));
+    }
+    $('mobileBar').addEventListener('click', () =>
+      document.querySelector('.result').scrollIntoView({ behavior: 'smooth', block: 'start' }));
 
     // Initial render
     renderResult();
