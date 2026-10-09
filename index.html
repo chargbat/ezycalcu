@@ -23,34 +23,58 @@
   <meta name="twitter:description" content="ขาย 1 จานได้กำไรกี่บาทกันแน่? หักค่า GP (+VAT) ต้นทุน กล่อง ส่วนลด เหลือเงินสุทธิเท่าไร คำนวณฟรีด้วย EzyCalcu">
   <meta name="twitter:image" content="https://chargbat.github.io/ezycalcu/og-image.png">
   
-  <!-- Theme Color for Mobile Browsers -->
-  <meta name="theme-color" content="#f4faf6">
+  <!-- Theme Color -->
+  <meta name="theme-color" content="#f8fafc">
   <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
-  <!-- Favicon (Inline SVG) -->
-  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍱</text></svg>">
+  <!-- Favicon (Precision SVG) -->
+  <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 24 24%22 fill=%22none%22 stroke=%22%23047857%22 stroke-width=%222%22 stroke-linecap=%22round%22 stroke-linejoin=%22round%22><rect width=%2218%22 height=%2218%22 x=%223%22 y=%223%22 rx=%222%22/><path d=%22M7 7h10M7 12h10M7 17h10%22/></svg>">
   <link rel="apple-touch-icon" href="apple-touch-icon.png">
 
-  <!-- Google Font -->
+  <!-- Google Fonts: IBM Plex Sans Thai (Professional Financial & SaaS standard) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Prompt:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans+Thai:wght@400;500;600;700&display=swap" rel="stylesheet">
 
   <style>
     :root {
-      --bg: hsl(150, 30%, 97%);
-      --card: hsl(0, 0%, 100%);
-      --card-solid: hsl(0, 0%, 100%);
-      --border: hsla(155, 25%, 28%, 0.16);
-      --border-focus: hsla(160, 90%, 30%, 0.5);
-      --text: hsl(160, 30%, 10%);
-      --muted: hsl(160, 10%, 36%);
-      --accent: hsl(161, 94%, 30%);
-      --accent-2: hsl(174, 80%, 30%);
-      --good: hsl(152, 78%, 27%);
-      --warn: hsl(28, 95%, 38%);
-      --bad: hsl(355, 78%, 44%);
-      --radius: 20px;
+      color-scheme: light;
+      --bg: #f8fafc;
+      --card: #ffffff;
+      --card-muted: #f8fafc;
+      --border: #e2e8f0;
+      --border-subtle: #edf2f7;
+      --border-strong: #cbd5e1;
+      --text: #0f172a;
+      --text-muted: #64748b;
+      --text-dim: #94a3b8;
+
+      /* Brand Accent: Deep Forest / Emerald */
+      --primary: #047857;
+      --primary-hover: #065f46;
+      --primary-subtle: #ecfdf5;
+      --primary-border: #a7f3d0;
+
+      /* Semantic Status */
+      --good-text: #047857;
+      --good-bg: #ecfdf5;
+      --good-border: #a7f3d0;
+
+      --warn-text: #b45309;
+      --warn-bg: #fffbeb;
+      --warn-border: #fde68a;
+
+      --bad-text: #e11d48;
+      --bad-bg: #fff1f2;
+      --bad-border: #fecdd3;
+
+      --radius-sm: 8px;
+      --radius-md: 12px;
+      --radius-lg: 16px;
+
+      --shadow-sm: 0 1px 2px 0 rgba(15, 23, 42, 0.05);
+      --shadow-card: 0 1px 3px 0 rgba(15, 23, 42, 0.06), 0 1px 2px -1px rgba(15, 23, 42, 0.04);
+      --shadow-float: 0 10px 25px -5px rgba(15, 23, 42, 0.12), 0 8px 10px -6px rgba(15, 23, 42, 0.04);
     }
 
     * {
@@ -61,60 +85,61 @@
     }
 
     body {
-      font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-family: 'IBM Plex Sans Thai', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      font-variant-numeric: tabular-nums;
       color: var(--text);
-      background:
-        radial-gradient(900px 500px at 10% -10%, hsla(160, 85%, 45%, 0.14), transparent 60%),
-        radial-gradient(800px 500px at 100% 0%, hsla(28, 95%, 60%, 0.13), transparent 60%),
-        var(--bg);
+      background-color: var(--bg);
+      background-image:
+        radial-gradient(at 0% 0%, rgba(4, 120, 87, 0.04) 0px, transparent 50%),
+        radial-gradient(at 100% 100%, rgba(2, 132, 199, 0.03) 0px, transparent 50%);
       min-height: 100vh;
       line-height: 1.5;
-      padding: max(20px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(40px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
+      padding: max(24px, env(safe-area-inset-top)) max(16px, env(safe-area-inset-right)) max(48px, env(safe-area-inset-bottom)) max(16px, env(safe-area-inset-left));
     }
 
     .wrap {
-      max-width: 1080px;
+      max-width: 1040px;
       margin: 0 auto;
     }
 
-    /* Header */
+    /* Top Brand Header */
     header {
-      text-align: center;
-      margin-bottom: 28px;
-      padding: 0 4px;
+      margin-bottom: 24px;
     }
     .badge {
       display: inline-flex;
       align-items: center;
       gap: 6px;
-      padding: 6px 14px;
-      border-radius: 999px;
-      font-size: 13px;
-      font-weight: 500;
-      color: var(--accent);
-      background: hsla(158, 78%, 48%, 0.12);
-      border: 1px solid hsla(158, 78%, 48%, 0.3);
-      margin-bottom: 12px;
+      padding: 4px 10px;
+      border-radius: var(--radius-sm);
+      font-size: 12.5px;
+      font-weight: 600;
+      color: var(--primary);
+      background: var(--primary-subtle);
+      border: 1px solid var(--primary-border);
+      margin-bottom: 10px;
+    }
+    .badge svg {
+      width: 14px;
+      height: 14px;
     }
     h1 {
-      font-size: clamp(24px, 5.5vw, 42px);
+      font-size: clamp(24px, 4vw, 34px);
       font-weight: 700;
+      letter-spacing: -0.02em;
+      color: var(--text);
       line-height: 1.25;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      -webkit-background-clip: text;
-      background-clip: text;
-      color: transparent;
     }
     header p {
-      color: var(--muted);
-      margin-top: 8px;
-      font-size: clamp(14px, 3.5vw, 16px);
+      color: var(--text-muted);
+      margin-top: 6px;
+      font-size: clamp(14px, 2.5vw, 15px);
     }
 
     /* Grid Layout */
     .grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: 1.08fr 0.92fr;
       gap: 20px;
       align-items: start;
     }
@@ -124,45 +149,66 @@
       }
     }
 
-    /* Card styling */
+    /* Card Standard */
     .card {
       background: var(--card);
       border: 1px solid var(--border);
-      border-radius: var(--radius);
-      padding: 24px;
-      backdrop-filter: blur(16px);
-      -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 12px 32px -16px rgba(16,70,48,0.28);
+      border-radius: var(--radius-lg);
+      padding: 22px;
+      box-shadow: var(--shadow-card);
     }
     @media (max-width: 480px) {
       .card {
         padding: 18px 14px;
-        border-radius: 16px;
+        border-radius: var(--radius-md);
       }
     }
+
     .card-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
       margin-bottom: 16px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid var(--border-subtle);
     }
     .card-header h2 {
-      font-size: 18px;
+      font-size: 16px;
       font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 8px;
     }
+    .card-header h2 svg {
+      width: 17px;
+      height: 17px;
+      color: var(--text-muted);
+    }
+
     .btn-demo {
-      font-size: 12px;
-      padding: 5px 10px;
-      background: hsla(158, 78%, 48%, 0.15);
-      border: 1px solid hsla(158, 78%, 48%, 0.3);
-      color: var(--accent);
-      border-radius: 8px;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12.5px;
+      padding: 6px 10px;
+      background: var(--card-muted);
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
       cursor: pointer;
       font-weight: 500;
-      transition: all .2s;
+      transition: all .15s;
     }
     .btn-demo:hover {
-      background: hsla(158, 78%, 48%, 0.25);
+      background: #f1f5f9;
+      color: var(--text);
+      border-color: var(--border-strong);
+    }
+    .btn-demo svg {
+      width: 13px;
+      height: 13px;
+      color: var(--primary);
     }
 
     /* Edit Banner */
@@ -171,12 +217,12 @@
       align-items: center;
       justify-content: space-between;
       padding: 10px 14px;
-      background: hsla(42, 95%, 58%, 0.14);
-      border: 1px solid hsla(42, 95%, 58%, 0.35);
-      border-radius: 12px;
+      background: #fffbeb;
+      border: 1px solid #fde68a;
+      border-radius: var(--radius-sm);
       font-size: 13px;
-      color: var(--warn);
-      margin-bottom: 16px;
+      color: #92400e;
+      margin-bottom: 14px;
     }
     .edit-banner.active {
       display: flex;
@@ -184,22 +230,23 @@
     .cancel-edit-btn {
       background: none;
       border: none;
-      color: var(--warn);
+      color: #b45309;
       text-decoration: underline;
       cursor: pointer;
-      font-size: 13px;
+      font-size: 12.5px;
       padding: 2px 6px;
     }
 
-    /* Form Inputs */
+    /* Form Fields */
     .field {
-      margin-bottom: 14px;
+      margin-bottom: 12px;
     }
     .field label {
       display: block;
-      font-size: 13px;
-      color: var(--muted);
-      margin-bottom: 6px;
+      font-size: 12.5px;
+      font-weight: 500;
+      color: var(--text-muted);
+      margin-bottom: 5px;
     }
     .row {
       display: grid;
@@ -216,35 +263,35 @@
     }
     .input-wrap span {
       position: absolute;
-      right: 14px;
+      right: 12px;
       top: 50%;
       transform: translateY(-50%);
-      color: var(--muted);
-      font-size: 13px;
+      color: var(--text-dim);
+      font-size: 12px;
       pointer-events: none;
+      user-select: none;
     }
-    /* iOS input font-size >= 16px prevents automatic browser zoom */
     input {
       width: 100%;
-      padding: 12px 42px 12px 14px;
+      padding: 10px 42px 10px 12px;
       font-family: inherit;
-      font-size: 16px;
+      font-size: 15px;
+      font-weight: 500;
       color: var(--text);
-      background: #fff;
+      background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 12px;
+      border-radius: var(--radius-sm);
       outline: none;
-      transition: border-color .2s, box-shadow .2s;
-      min-height: 48px;
+      transition: border-color .15s, box-shadow .15s;
+      min-height: 46px;
     }
     input[type="text"] {
-      padding-right: 14px;
+      padding-right: 12px;
     }
     input:focus {
-      border-color: var(--accent);
-      box-shadow: 0 0 0 3px hsla(160, 90%, 30%, 0.2);
+      border-color: var(--primary);
+      box-shadow: 0 0 0 3px rgba(4, 120, 87, 0.12);
     }
-    /* Remove Spinners */
     input[type=number]::-webkit-inner-spin-button,
     input[type=number]::-webkit-outer-spin-button {
       -webkit-appearance: none;
@@ -254,216 +301,415 @@
       -moz-appearance: textfield;
     }
 
-    /* VAT Checkbox Box */
+    /* VAT Box */
     .vat-box {
-      background: hsl(40, 70%, 95%);
-      border: 1px dashed var(--border);
-      border-radius: 12px;
-      padding: 10px 14px;
-      margin-bottom: 16px;
+      background: #f8fafc;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      margin: 12px 0 16px;
     }
     .checkbox-label {
       display: flex;
       align-items: flex-start;
-      gap: 10px;
+      gap: 9px;
       font-size: 13px;
       cursor: pointer;
       user-select: none;
     }
     .checkbox-label input[type="checkbox"] {
-      width: 18px;
-      height: 18px;
-      min-height: 18px;
+      width: 16px;
+      height: 16px;
+      min-height: 16px;
       margin-top: 2px;
-      accent-color: var(--accent);
+      accent-color: var(--primary);
       cursor: pointer;
     }
     .vat-desc {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 12px;
-      margin-top: 2px;
+      margin-top: 1px;
       line-height: 1.4;
     }
     .vat-highlight {
-      color: var(--accent);
+      color: var(--primary);
       font-weight: 600;
     }
 
-    /* Buttons */
+    /* Action Buttons */
     .btns {
       display: flex;
-      gap: 10px;
-      margin-top: 6px;
-      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 4px;
+      align-items: center;
     }
     button {
       font-family: inherit;
       cursor: pointer;
-      border: none;
-      border-radius: 12px;
-      padding: 13px 18px;
+      border-radius: var(--radius-sm);
+      padding: 11px 18px;
       font-weight: 600;
-      font-size: 15px;
-      min-height: 48px;
-      transition: transform .15s, box-shadow .2s, background .2s;
+      font-size: 14.5px;
+      min-height: 46px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 7px;
+      transition: all .15s;
     }
     button:active {
-      transform: scale(.98);
+      transform: scale(0.99);
     }
     .primary {
-      color: #fff;
-      background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      box-shadow: 0 10px 25px -10px hsla(160, 90%, 30%, 0.45);
+      color: #ffffff;
+      background: var(--primary);
+      border: 1px solid var(--primary-hover);
+      box-shadow: var(--shadow-sm);
       flex: 1;
-      min-width: 140px;
+    }
+    .primary:hover {
+      background: var(--primary-hover);
+    }
+    .primary svg {
+      width: 16px;
+      height: 16px;
+    }
+    .primary:disabled {
+      opacity: 0.65;
+      cursor: not-allowed;
     }
     .ghost {
-      color: var(--text);
-      background: hsla(150, 25%, 25%, 0.064);
+      color: var(--text-muted);
+      background: transparent;
       border: 1px solid var(--border);
+      font-weight: 500;
+      padding: 11px 14px;
     }
     .ghost:hover {
-      background: hsla(150, 25%, 25%, 0.128);
+      background: #f1f5f9;
+      color: var(--text);
+    }
+    .ghost svg {
+      width: 15px;
+      height: 15px;
     }
 
-    /* Result Panel */
-    .result {
-      text-align: center;
+    /* Result Card (Digital Receipt Slip Style) */
+    .result-card {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      padding: 0;
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
       position: sticky;
       top: 16px;
     }
-    .profit-label {
-      color: var(--muted);
-      font-size: 14px;
-    }
-    .profit {
-      font-size: clamp(40px, 8.5vw, 64px);
-      font-weight: 700;
-      line-height: 1.15;
-      margin: 4px 0 6px;
-      transition: color .3s;
-    }
-    .status {
-      display: inline-block;
-      padding: 6px 16px;
-      border-radius: 999px;
-      font-size: 13.5px;
-      font-weight: 500;
-      margin-bottom: 18px;
-      transition: all .3s;
-    }
-    .s-good { color: var(--good); background: hsla(152, 70%, 50%, .14); }
-    .s-warn { color: var(--warn); background: hsla(42, 95%, 58%, .14); }
-    .s-bad  { color: var(--bad);  background: hsla(355, 85%, 62%, .14); }
-    .s-idle { color: var(--muted); background: hsla(220, 20%, 60%, .12); }
-    .profit.good { color: var(--good); }
-    .profit.warn { color: var(--warn); }
-    .profit.bad { color: var(--bad); }
-    .profit.idle { color: var(--muted); }
-
-    .breakdown {
-      text-align: left;
-      border-top: 1px solid var(--border);
-      padding-top: 14px;
-    }
-    .line {
+    .receipt-top {
+      padding: 18px 20px 14px;
+      background: #ffffff;
+      border-bottom: 1px solid var(--border-subtle);
       display: flex;
+      align-items: center;
       justify-content: space-between;
-      padding: 6px 0;
-      font-size: 13.5px;
-      color: var(--muted);
     }
-    .line b {
+    .receipt-top h2 {
+      font-size: 15px;
+      font-weight: 600;
       color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .receipt-top h2 svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+    .receipt-badge {
+      font-size: 11.5px;
       font-weight: 500;
-    }
-    .line.neg b {
-      color: var(--bad);
-    }
-    .line.total {
-      border-top: 1px dashed var(--border);
-      margin-top: 6px;
-      padding-top: 10px;
-      color: var(--text);
-    }
-
-    .tips {
-      margin-top: 16px;
-      display: grid;
-      gap: 10px;
-      text-align: left;
-    }
-    .tip {
-      padding: 12px 14px;
-      border-radius: 12px;
-      font-size: 13px;
-      background: hsla(150, 25%, 25%, 0.048);
+      color: var(--text-muted);
+      background: var(--bg);
+      padding: 3px 8px;
+      border-radius: 4px;
       border: 1px solid var(--border);
     }
-    .tip strong {
-      color: var(--accent);
+
+    /* Hero Profit Box */
+    .hero-profit-box {
+      padding: 18px 20px;
+      text-align: center;
+      background: #f8fafc;
+      border-bottom: 1px dashed var(--border-strong);
+      transition: background-color .2s;
+    }
+    .hero-profit-box.good { background: #f0fdf4; }
+    .hero-profit-box.warn { background: #fffbeb; }
+    .hero-profit-box.bad  { background: #fff1f2; }
+    .hero-profit-box.idle { background: #f8fafc; }
+
+    .profit-sub {
+      font-size: 12.5px;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+    .profit-num {
+      font-size: clamp(38px, 6vw, 48px);
+      font-weight: 700;
+      line-height: 1.15;
+      letter-spacing: -0.03em;
+      margin: 4px 0 6px;
+      color: var(--text);
+    }
+    .profit-num.good { color: var(--good-text); }
+    .profit-num.warn { color: var(--warn-text); }
+    .profit-num.bad  { color: var(--bad-text); }
+    .profit-num.idle { color: var(--text-muted); }
+
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      padding: 3px 10px;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 600;
+      border: 1px solid transparent;
+    }
+    .status-badge svg {
+      width: 12px;
+      height: 12px;
+    }
+    .s-good { color: var(--good-text); background: var(--good-bg); border-color: var(--good-border); }
+    .s-warn { color: var(--warn-text); background: var(--warn-bg); border-color: var(--warn-border); }
+    .s-bad  { color: var(--bad-text);  background: var(--bad-bg);  border-color: var(--bad-border); }
+    .s-idle { color: var(--text-muted); background: #e2e8f0; border-color: #cbd5e1; }
+
+    /* Receipt Breakdown Items */
+    .receipt-body {
+      padding: 14px 20px;
+      font-size: 13.5px;
+    }
+    .r-group {
+      padding: 5px 0;
+    }
+    .r-line {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 5px 0;
+      color: var(--text-muted);
+    }
+    .r-line b {
+      color: var(--text);
+      font-weight: 600;
+    }
+    .r-line.neg b {
+      color: var(--bad-text);
+      font-weight: 500;
+    }
+    .r-line.highlight {
+      background: #f1f5f9;
+      margin: 4px -8px;
+      padding: 6px 8px;
+      border-radius: 6px;
+      color: var(--text);
+      font-weight: 500;
+    }
+    .r-line.highlight b {
+      color: var(--primary);
+    }
+    .r-dash {
+      border-top: 1px dashed var(--border);
+      margin: 6px 0;
+    }
+    .r-line.total-line {
+      border-top: 1.5px solid var(--border-strong);
+      padding-top: 9px;
+      margin-top: 4px;
+      color: var(--text);
+      font-weight: 600;
+    }
+    .r-line.total-line b {
+      color: var(--primary);
+      font-size: 15px;
     }
 
-    .share-btn-wrap {
-      margin-top: 14px;
+    /* Insights Dual Cards */
+    .receipt-insights {
+      padding: 0 20px 16px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 8px;
+    }
+    .insight-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      padding: 10px 12px;
+      font-size: 12px;
+    }
+    .insight-card .label {
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-bottom: 2px;
+    }
+    .insight-card .label svg {
+      width: 13px;
+      height: 13px;
+      color: var(--primary);
+    }
+    .insight-card .val {
+      font-size: 14px;
+      font-weight: 700;
+      color: var(--text);
+    }
+    .insight-card small {
+      display: block;
+      color: var(--text-dim);
+      font-size: 11px;
+      margin-top: 1px;
+    }
+
+    /* Share Button Footer */
+    .receipt-footer {
+      padding: 12px 20px 16px;
+      border-top: 1px solid var(--border-subtle);
+      background: #ffffff;
     }
     .share-btn {
       width: 100%;
-      background: hsla(150, 25%, 25%, 0.064);
+      background: #ffffff;
       border: 1px solid var(--border);
       color: var(--text);
-      font-size: 14px;
+      font-size: 13.5px;
+      font-weight: 600;
       padding: 10px;
-      border-radius: 10px;
+      border-radius: var(--radius-sm);
       display: flex;
       align-items: center;
       justify-content: center;
-      gap: 8px;
+      gap: 7px;
+      transition: all .15s;
     }
     .share-btn:hover {
-      background: hsla(150, 25%, 25%, 0.12);
+      background: #f8fafc;
+      border-color: var(--border-strong);
+    }
+    .share-btn svg {
+      width: 15px;
+      height: 15px;
+      color: var(--text-muted);
     }
 
-    /* Table & Card List Section */
-    .table-card {
+    /* Table & KPI Section */
+    .table-section {
       margin-top: 24px;
     }
-    .table-head {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 14px;
-      flex-wrap: wrap;
-      gap: 8px;
-    }
-    .table-head h2 {
-      font-size: 18px;
-      margin: 0;
-    }
-    .summary {
+    .summary-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
+      gap: 12px;
       margin-bottom: 16px;
     }
-    .sum-box {
-      padding: 12px 14px;
-      border-radius: 14px;
-      background: hsla(150, 25%, 25%, 0.048);
+    @media (max-width: 640px) {
+      .summary-grid {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+    }
+    .kpi-card {
+      background: #ffffff;
       border: 1px solid var(--border);
+      border-radius: var(--radius-md);
+      padding: 14px 16px;
+      box-shadow: var(--shadow-sm);
+      display: flex;
+      align-items: center;
+      gap: 12px;
     }
-    .sum-box small {
-      color: var(--muted);
-      font-size: 11.5px;
+    .kpi-icon {
+      width: 36px;
+      height: 36px;
+      border-radius: var(--radius-sm);
+      background: #f1f5f9;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-shrink: 0;
+    }
+    .kpi-icon.primary { background: var(--primary-subtle); color: var(--primary); }
+    .kpi-icon.danger { background: #fff1f2; color: var(--bad-text); }
+    .kpi-icon svg { width: 18px; height: 18px; }
+
+    .kpi-info small {
+      color: var(--text-muted);
+      font-size: 12px;
       display: block;
+      font-weight: 500;
     }
-    .sum-box div {
-      font-size: clamp(15px, 3.5vw, 18px);
-      font-weight: 600;
+    .kpi-info .kpi-num {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--text);
+      line-height: 1.2;
       margin-top: 2px;
     }
 
-    /* Desktop Table */
+    /* Table Styling */
+    .table-wrap {
+      background: #ffffff;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-lg);
+      box-shadow: var(--shadow-card);
+      overflow: hidden;
+    }
+    .table-top {
+      padding: 16px 20px;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .table-top h2 {
+      font-size: 15px;
+      font-weight: 600;
+      color: var(--text);
+      display: flex;
+      align-items: center;
+      gap: 7px;
+    }
+    .table-top h2 svg {
+      width: 16px;
+      height: 16px;
+      color: var(--text-muted);
+    }
+    .btn-clear {
+      padding: 6px 10px;
+      font-size: 12px;
+      color: var(--text-muted);
+      background: transparent;
+      border: 1px solid var(--border);
+      border-radius: var(--radius-sm);
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 5px;
+      min-height: auto;
+    }
+    .btn-clear:hover {
+      color: var(--bad-text);
+      border-color: #fecdd3;
+      background: #fff1f2;
+    }
+    .btn-clear svg { width: 12px; height: 12px; }
+
     .scroll {
       overflow-x: auto;
       -webkit-overflow-scrolling: touch;
@@ -474,58 +720,74 @@
       min-width: 620px;
     }
     th, td {
-      padding: 12px 10px;
+      padding: 12px 14px;
       text-align: right;
       font-size: 13.5px;
-      border-bottom: 1px solid var(--border);
+      border-bottom: 1px solid var(--border-subtle);
     }
     th {
-      color: var(--muted);
-      font-weight: 500;
+      color: var(--text-muted);
+      font-weight: 600;
       font-size: 12px;
+      background: #f8fafc;
+      letter-spacing: 0.02em;
     }
     th:first-child, td:first-child {
       text-align: left;
     }
     tbody tr:hover {
-      background: hsla(150, 25%, 25%, 0.04);
+      background: #f8fafc;
+    }
+    td strong {
+      color: var(--text);
+      font-weight: 600;
+      overflow-wrap: anywhere;
     }
     .pill {
       display: inline-block;
-      padding: 3px 10px;
-      border-radius: 999px;
-      font-size: 12px;
-      font-weight: 500;
+      padding: 2px 8px;
+      border-radius: 4px;
+      font-size: 11.5px;
+      font-weight: 600;
     }
+
     .icon-btn {
-      padding: 6px 10px;
-      font-size: 12.5px;
-      border-radius: 8px;
+      padding: 5px 9px;
+      font-size: 12px;
+      border-radius: 6px;
       background: transparent;
-      color: var(--muted);
+      color: var(--text-muted);
       border: 1px solid var(--border);
       margin-left: 4px;
       min-height: auto;
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      cursor: pointer;
     }
     .icon-btn:hover {
       color: var(--text);
-      background: hsla(150, 25%, 25%, 0.08);
+      background: #f1f5f9;
+      border-color: var(--border-strong);
     }
     .icon-btn.del:hover {
-      color: var(--bad);
-      border-color: var(--bad);
+      color: var(--bad-text);
+      border-color: #fecdd3;
+      background: #fff1f2;
     }
+    .icon-btn svg { width: 12px; height: 12px; }
 
-    /* Mobile Menu Cards (Hidden on desktop, shown on mobile) */
+    /* Mobile Menu Cards */
     .mobile-menu-list {
       display: none;
-      gap: 12px;
+      padding: 12px;
+      gap: 10px;
     }
     .menu-item-card {
-      background: #fff;
+      background: #ffffff;
       border: 1px solid var(--border);
-      border-radius: 14px;
-      padding: 14px;
+      border-radius: var(--radius-sm);
+      padding: 12px 14px;
       display: flex;
       flex-direction: column;
       gap: 8px;
@@ -538,14 +800,15 @@
     }
     .mic-title {
       font-weight: 600;
-      font-size: 15px;
-      word-break: break-word;
+      font-size: 14.5px;
+      color: var(--text);
+      overflow-wrap: anywhere;
     }
     .mic-profit {
       text-align: right;
     }
     .mic-profit b {
-      font-size: 16px;
+      font-size: 15px;
       display: block;
     }
     .mic-details {
@@ -553,65 +816,39 @@
       grid-template-columns: 1fr 1fr;
       gap: 6px;
       font-size: 12px;
-      color: var(--muted);
-      background: hsl(150, 25%, 96%);
+      color: var(--text-muted);
+      background: #f8fafc;
       padding: 8px 10px;
-      border-radius: 8px;
+      border-radius: 6px;
+    }
+    .mic-details b {
+      color: var(--text);
     }
     .mic-actions {
       display: flex;
       justify-content: flex-end;
-      gap: 8px;
-      margin-top: 4px;
+      gap: 6px;
+      margin-top: 2px;
     }
     .mic-actions button {
-      padding: 6px 12px;
-      font-size: 12.5px;
       min-height: 36px;
+      padding: 6px 10px;
+      font-size: 12px;
     }
 
     @media (max-width: 720px) {
-      .scroll {
-        display: none;
-      }
-      .mobile-menu-list {
-        display: flex;
-        flex-direction: column;
-      }
+      .scroll { display: none; }
+      .mobile-menu-list { display: flex; flex-direction: column; }
     }
 
     .empty {
       text-align: center;
-      color: var(--muted);
-      padding: 24px 0;
-      font-size: 14px;
-    }
-
-    /* Toast Notification */
-    .toast {
-      position: fixed;
-      top: calc(16px + env(safe-area-inset-top));
-      left: 50%;
-      transform: translateX(-50%) translateY(-120px);
-      background: hsla(160, 35%, 12%, 0.96);
-      border: 1px solid var(--accent);
-      color: var(--text);
-      padding: 10px 20px;
-      border-radius: 30px;
+      color: var(--text-muted);
+      padding: 32px 16px;
       font-size: 13.5px;
-      box-shadow: 0 10px 30px rgba(0,0,0,0.5);
-      backdrop-filter: blur(8px);
-      opacity: 0;
-      transition: all 0.3s cubic-bezier(0.18, 0.89, 0.32, 1.28);
-      z-index: 9999;
-      pointer-events: none;
-    }
-    .toast.show {
-      transform: translateX(-50%) translateY(0);
-      opacity: 1;
     }
 
-    /* Mobile live-profit bar: keeps the result visible while typing on phones */
+    /* Mobile Bottom Sticky Bar */
     .mobile-bar {
       display: none;
       position: fixed;
@@ -623,106 +860,121 @@
       justify-content: space-between;
       gap: 10px;
       padding: 10px 16px;
-      min-height: 60px;
+      min-height: 56px;
       text-align: left;
       color: var(--text);
-      background: hsla(0, 0%, 100%, 0.97);
-      border: 1px solid var(--border-focus);
-      border-radius: 16px;
-      backdrop-filter: blur(14px);
-      -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 12px 30px -8px rgba(16,70,48,.3);
+      background: rgba(255, 255, 255, 0.98);
+      border: 1px solid var(--border-strong);
+      border-radius: var(--radius-md);
+      box-shadow: var(--shadow-float);
       opacity: 0;
       transform: translateY(24px);
       pointer-events: none;
-      transition: opacity .25s, transform .25s;
+      transition: opacity .2s, transform .2s;
     }
     .mobile-bar.show { opacity: 1; transform: translateY(0); pointer-events: auto; }
-    .mb-left small { display: block; font-size: 11.5px; color: var(--muted); font-weight: 400; }
+    .mb-left small { display: block; font-size: 11px; color: var(--text-muted); font-weight: 500; }
     .mb-value { font-size: 20px; font-weight: 700; line-height: 1.2; }
-    .mb-value.good { color: var(--good); }
-    .mb-value.warn { color: var(--warn); }
-    .mb-value.bad { color: var(--bad); }
-    .mb-value.idle { color: var(--muted); }
+    .mb-value.good { color: var(--good-text); }
+    .mb-value.warn { color: var(--warn-text); }
+    .mb-value.bad  { color: var(--bad-text); }
+    .mb-value.idle { color: var(--text-muted); }
     .mb-right { display: flex; align-items: center; gap: 8px; }
-    .mb-link { font-size: 12px; color: var(--muted); font-weight: 500; }
+    .mb-link { font-size: 12px; color: var(--text-muted); font-weight: 500; }
+
     @media (max-width: 860px) {
       .mobile-bar { display: flex; }
-      body { padding-bottom: calc(96px + env(safe-area-inset-bottom)); }
+      body { padding-bottom: calc(88px + env(safe-area-inset-bottom)); }
     }
     @media (max-width: 340px) { .mb-link { display: none; } }
 
-    /* Footer Notes & Credit */
+    /* Toast Notification */
+    .toast {
+      position: fixed;
+      top: calc(16px + env(safe-area-inset-top));
+      left: 50%;
+      transform: translateX(-50%) translateY(-120px);
+      background: #0f172a;
+      border: 1px solid #334155;
+      color: #ffffff;
+      padding: 9px 18px;
+      border-radius: 999px;
+      font-size: 13px;
+      font-weight: 500;
+      box-shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.25);
+      opacity: 0;
+      transition: all 0.25s cubic-bezier(0.18, 0.89, 0.32, 1.28);
+      z-index: 9999;
+      pointer-events: none;
+    }
+    .toast.show {
+      transform: translateX(-50%) translateY(0);
+      opacity: 1;
+    }
+
+    /* Footer Notes */
     .footer-note {
-      color: var(--muted);
+      color: var(--text-muted);
       font-size: 12px;
-      margin-top: 28px;
+      margin-top: 32px;
       text-align: center;
       line-height: 1.6;
     }
     .credit {
-      margin-top: 14px;
+      margin-top: 8px;
       font-size: 12px;
-      color: var(--muted);
+      color: var(--text-dim);
       text-align: center;
     }
-    .credit a {
-      color: var(--accent);
-      text-decoration: none;
-    }
-    /* ===== Friendly Food POS: big, chunky, readable in sunlight ===== */
-    :root { color-scheme: light; }
-    input { min-height: 54px; border-radius: 16px; font-weight: 500; }
-    button { min-height: 52px; border-radius: 16px; }
-    .primary { font-size: 17px; }
-    .icon-btn { min-height: 40px; }
-    .mic-actions button { min-height: 44px; }
-    .profit { font-size: clamp(54px, 15vw, 88px); font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
-    .mb-value { font-size: 22px; }
-    .toast { color: #fff; }
-    .mic-title, td:first-child strong { overflow-wrap: anywhere; word-break: break-word; }
-    td:first-child { max-width: 220px; }
-    .status { font-weight: 600; }
   </style>
 </head>
 <body>
   <main class="wrap">
     <header>
-      <span class="badge">🍱 EzyCalcu • คำนวณต้นทุน & กำไรจริง</span>
+      <span class="badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6M16 12H8M14 16H8"/></svg>
+        EzyCalcu • เครื่องคำนวณกำไรต่อจาน
+      </span>
       <h1>ขาย 1 จาน ได้กำไรจริงกี่บาท?</h1>
-      <p>รู้ทันทีหลังหักค่า GP 30% (+VAT 7%) ต้นทุนวัตถุดิบ บรรจุภัณฑ์ และส่วนลด</p>
+      <p>คำนวณเงินเข้ากระเป๋าจริงหลังหักค่า GP เดลิเวอรี่, VAT 7%, ต้นทุนวัตถุดิบ, ค่ากล่อง และส่วนลด</p>
     </header>
 
     <section class="grid">
       <!-- Input Form Card -->
       <form class="card" id="menuForm" autocomplete="off">
         <div class="card-header">
-          <h2>🍽️ ข้อมูลเมนู</h2>
-          <button type="button" class="btn-demo" id="demoBtn">💡 โหลดตัวอย่าง</button>
+          <h2>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 6h16M4 12h16M4 18h7"/></svg>
+            ข้อมูลเมนูและต้นทุน
+          </h2>
+          <button type="button" class="btn-demo" id="demoBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.9 5.8a2 2 0 0 1-1.3 1.3L3 12l5.8 1.9a2 2 0 0 1 1.3 1.3L12 21l1.9-5.8a2 2 0 0 1 1.3-1.3L21 12l-5.8-1.9a2 2 0 0 1-1.3-1.3Z"/></svg>
+            โหลดตัวอย่าง
+          </button>
         </div>
 
         <div class="edit-banner" id="editBanner">
-          <span>✏️ กำลังแก้ไข: <b id="editingName"></b></span>
+          <span>กำลังแก้ไขเมนู: <b id="editingName"></b></span>
           <button type="button" class="cancel-edit-btn" id="cancelEditBtn">ยกเลิก</button>
         </div>
 
         <div class="field">
           <label for="name">ชื่อเมนู</label>
-          <input type="text" id="name" placeholder="เช่น ข้าวมันไก่พิเศษ" required>
+          <input type="text" id="name" placeholder="เช่น ข้าวมันไก่พิเศษ" required maxlength="50">
         </div>
 
         <div class="row">
           <div class="field">
             <label for="price">ราคาขาย (เดลิเวอรี่/หน้าร้าน)</label>
             <div class="input-wrap">
-              <input type="number" id="price" min="0" step="any" inputmode="decimal" placeholder="70" required>
+              <input type="number" id="price" min="0" max="100000" step="any" inputmode="decimal" placeholder="70" required>
               <span>บาท</span>
             </div>
           </div>
           <div class="field">
             <label for="cost">ค่าของ / วัตถุดิบ ต่อจาน</label>
             <div class="input-wrap">
-              <input type="number" id="cost" min="0" step="any" inputmode="decimal" placeholder="25" required>
+              <input type="number" id="cost" min="0" max="100000" step="any" inputmode="decimal" placeholder="25" required>
               <span>บาท</span>
             </div>
           </div>
@@ -730,16 +982,16 @@
 
         <div class="row">
           <div class="field">
-            <label for="pack">ค่ากล่อง/ถุง/ช้อน</label>
+            <label for="pack">ค่ากล่อง / ถุง / ช้อน</label>
             <div class="input-wrap">
-              <input type="number" id="pack" min="0" step="any" inputmode="decimal" placeholder="4" value="0">
+              <input type="number" id="pack" min="0" max="100000" step="any" inputmode="decimal" placeholder="4" value="0">
               <span>บาท</span>
             </div>
           </div>
           <div class="field">
             <label for="discount">ส่วนลดที่ร้านออกเอง</label>
             <div class="input-wrap">
-              <input type="number" id="discount" min="0" step="any" inputmode="decimal" placeholder="0" value="0">
+              <input type="number" id="discount" min="0" max="100000" step="any" inputmode="decimal" placeholder="0" value="0">
               <span>บาท</span>
             </div>
           </div>
@@ -747,16 +999,16 @@
 
         <div class="row">
           <div class="field">
-            <label for="gp">ค่า GP (เช่น 30% หรือ 0% ถ้าขายหน้าร้าน)</label>
+            <label for="gp">ค่า GP เดลิเวอรี่ (ถ้าขายหน้าร้านใส่ 0)</label>
             <div class="input-wrap">
-              <input type="number" id="gp" min="0" max="99" step="any" inputmode="decimal" value="30">
+              <input type="number" id="gp" min="0" max="60" step="any" inputmode="decimal" value="30">
               <span>%</span>
             </div>
           </div>
           <div class="field">
             <label for="target">อยากได้กำไรกี่ %</label>
             <div class="input-wrap">
-              <input type="number" id="target" min="0" max="90" step="any" inputmode="decimal" value="25">
+              <input type="number" id="target" min="0" max="80" step="any" inputmode="decimal" value="25">
               <span>%</span>
             </div>
           </div>
@@ -767,105 +1019,194 @@
           <label class="checkbox-label" for="vatCheckbox">
             <input type="checkbox" id="vatCheckbox" checked>
             <div>
-              <span>รวม VAT 7% ของค่า GP (แนะนำ)</span>
-              <div class="vat-desc">เดลิเวอรี่คิด VAT 7% ของ GP ทำให้ GP หักจริงคือ <span class="vat-highlight" id="vatLabel">32.10%</span></div>
+              <span>รวม VAT 7% ของค่า GP (แนะนำสำหรับแอปเดลิเวอรี่)</span>
+              <div class="vat-desc">แอปคิด VAT 7% ของค่า GP เพิ่มเติม ทำให้ GP หักจริงคือ <span class="vat-highlight" id="vatLabel">32.10%</span></div>
             </div>
           </label>
         </div>
 
         <div class="btns">
-          <button type="submit" class="primary" id="saveBtn">💾 บันทึกเมนู</button>
-          <button type="button" class="ghost" id="resetBtn">ล้างฟอร์ม</button>
+          <button type="submit" class="primary" id="saveBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg>
+            บันทึกเมนู
+          </button>
+          <button type="button" class="ghost" id="resetBtn">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 12a9 9 0 1 0 9-9 9.75 9.75 0 0 0-6.74 2.74L3 8"/><path d="M3 3v5h5"/></svg>
+            ล้างฟอร์ม
+          </button>
         </div>
       </form>
 
-      <!-- Result Card -->
-      <div class="card result" aria-live="polite">
-        <h2>💰 กำไรจริงต่อจาน</h2>
-        <div class="profit-label">กำไรสุทธิหลังหักทุกอย่าง</div>
-        <div class="profit idle" id="profit">฿0.00</div>
-        <div class="status s-idle" id="status">กรอกข้อมูลเพื่อคำนวณ</div>
-
-        <div class="breakdown">
-          <div class="line"><span>ราคาขาย</span><b id="bPrice">฿0.00</b></div>
-          <div class="line neg"><span>หัก ส่วนลดร้าน</span><b id="bDiscount">-฿0.00</b></div>
-          <div class="line neg"><span id="lblGpBreakdown">หัก ค่า GP (32.1%)</span><b id="bGp">-฿0.00</b></div>
-          <div class="line"><span>= เงินที่ร้านได้รับจริง</span><b id="bNet">฿0.00</b></div>
-          <div class="line neg"><span>หัก ค่าของ (วัตถุดิบ)</span><b id="bCost">-฿0.00</b></div>
-          <div class="line neg"><span>หัก ค่ากล่อง/ถุง</span><b id="bPack">-฿0.00</b></div>
-          <div class="line total"><span>เปอร์เซ็นต์กำไร</span><b id="bMargin">0.0%</b></div>
+      <!-- Result Card: Digital Receipt Slip -->
+      <div class="result-card" aria-live="polite">
+        <div class="receipt-top">
+          <h2>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 2v20l2-1 2 1 2-1 2 1 2-1 2 1 2-1 2 1V2l-2 1-2-1-2 1-2-1-2 1-2-1-2 1Z"/><path d="M16 8h-6M16 12H8M14 16H8"/></svg>
+            สรุปผลกำไรต่อจาน
+          </h2>
+          <span class="receipt-badge">สลิปคำนวณจริง</span>
         </div>
 
-        <div class="tips">
-          <div class="tip">🎯 <strong>ราคาคุ้มทุน:</strong> <span id="tBreak">-</span></div>
-          <div class="tip">📈 <strong>ราคาที่ควรขาย</strong> (ให้ได้ margin <span id="tTargetPct">25</span>%): <span id="tSuggest">-</span></div>
+        <!-- Hero Profit Box -->
+        <div class="hero-profit-box idle" id="heroBox">
+          <div class="profit-sub">กำไรสุทธิหลังหักทุกอย่าง</div>
+          <div class="profit-num idle" id="profit">฿0.00</div>
+          <div>
+            <span class="status-badge s-idle" id="status">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>
+              <span>กรอกข้อมูลเพื่อคำนวณ</span>
+            </span>
+          </div>
         </div>
 
-        <div class="share-btn-wrap">
+        <!-- Itemized Breakdown -->
+        <div class="receipt-body">
+          <div class="r-group">
+            <div class="r-line"><span>ราคาขาย</span><b id="bPrice">฿0.00</b></div>
+            <div class="r-line neg"><span>หัก ส่วนลดร้าน</span><b id="bDiscount">-฿0.00</b></div>
+          </div>
+
+          <div class="r-dash"></div>
+
+          <div class="r-group">
+            <div class="r-line neg"><span id="lblGpBreakdown">หัก ค่า GP (32.1%)</span><b id="bGp">-฿0.00</b></div>
+            <div class="r-line highlight"><span>= เงินที่ร้านได้รับจริง</span><b id="bNet">฿0.00</b></div>
+          </div>
+
+          <div class="r-dash"></div>
+
+          <div class="r-group">
+            <div class="r-line neg"><span>หัก ค่าของ (วัตถุดิบ)</span><b id="bCost">-฿0.00</b></div>
+            <div class="r-line neg"><span>หัก ค่ากล่อง/ถุง/ช้อน</span><b id="bPack">-฿0.00</b></div>
+          </div>
+
+          <div class="r-line total-line">
+            <span>เปอร์เซ็นต์กำไร (Margin)</span>
+            <b id="bMargin">0.0%</b>
+          </div>
+        </div>
+
+        <!-- Dual Insight Cards -->
+        <div class="receipt-insights">
+          <div class="insight-card">
+            <div class="label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><circle cx="12" cy="12" r="6"/><circle cx="12" cy="12" r="2"/></svg>
+              จุดคุ้มทุน
+            </div>
+            <div class="val" id="tBreak">-</div>
+            <small>ต่ำกว่านี้จะเข้าเนื้อ</small>
+          </div>
+          <div class="insight-card">
+            <div class="label">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+              ราคาแนะนำ
+            </div>
+            <div class="val" id="tSuggest">-</div>
+            <small>เพื่อให้ได้กำไร <span id="tTargetPct">25</span>%</small>
+          </div>
+        </div>
+
+        <div class="receipt-footer">
           <button type="button" class="share-btn" id="copyShareBtn">
-            <span>📤 แชร์สรุปกำไร (EzyCalcu)</span>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8"/><polyline points="16 6 12 2 8 6"/><line x1="12" y1="2" x2="12" y2="15"/></svg>
+            <span>แชร์สรุปกำไร (ส่งต่อใน LINE)</span>
           </button>
         </div>
       </div>
     </section>
 
-    <!-- Menu List Table & Mobile Cards -->
-    <section class="card table-card">
-      <div class="table-head">
-        <h2>📋 เมนูทั้งหมด (เรียงตามกำไร)</h2>
-        <button class="ghost icon-btn" id="clearAll" type="button">ลบทั้งหมด</button>
+    <!-- Menu Registry & Statistics -->
+    <section class="table-section">
+      <div class="summary-grid">
+        <div class="kpi-card">
+          <div class="kpi-icon primary">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 4h2a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h2"/><rect x="8" y="2" width="8" height="4" rx="1"/></svg>
+          </div>
+          <div class="kpi-info">
+            <small>จำนวนเมนูที่บันทึก</small>
+            <div class="kpi-num" id="sCount">0/50</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="M16 8h-6a2 2 0 1 0 0 4h4a2 2 0 1 1 0 4H8"/><path d="M12 18V6"/></svg>
+          </div>
+          <div class="kpi-info">
+            <small>กำไรเฉลี่ยต่อจาน</small>
+            <div class="kpi-num" id="sAvg">฿0.00</div>
+          </div>
+        </div>
+
+        <div class="kpi-card">
+          <div class="kpi-icon danger">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="12" y1="8" x2="12" y2="12"/><line x1="12" y1="16" x2="12.01" y2="16"/></svg>
+          </div>
+          <div class="kpi-info">
+            <small>เมนูที่ควรปรับราคา (ขาดทุน)</small>
+            <div class="kpi-num" id="sLoss" style="color:var(--bad-text)">0</div>
+          </div>
+        </div>
       </div>
 
-      <div class="summary">
-        <div class="sum-box"><small>จำนวนเมนู</small><div id="sCount">0</div></div>
-        <div class="sum-box"><small>กำไรเฉลี่ย/จาน</small><div id="sAvg">฿0.00</div></div>
-        <div class="sum-box"><small>เมนูขาดทุน</small><div id="sLoss" style="color:var(--bad)">0</div></div>
-      </div>
+      <div class="table-wrap">
+        <div class="table-top">
+          <h2>
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="18" x="3" y="3" rx="2"/><path d="M3 9h18M9 21V9"/></svg>
+            ตารางเปรียบเทียบเมนู (เรียงตามกำไรมากไปน้อย)
+          </h2>
+          <button class="btn-clear" id="clearAll" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+            ล้างเมนูทั้งหมด
+          </button>
+        </div>
 
-      <!-- Desktop Table -->
-      <div class="scroll">
-        <table>
-          <thead>
-            <tr>
-              <th>เมนู</th>
-              <th>ราคาขาย</th>
-              <th>หัก GP</th>
-              <th>ต้นทุนรวม</th>
-              <th>กำไร/จาน</th>
-              <th>Margin</th>
-              <th>จัดการ</th>
-            </tr>
-          </thead>
-          <tbody id="tbody"></tbody>
-        </table>
-      </div>
+        <!-- Desktop Table -->
+        <div class="scroll">
+          <table>
+            <thead>
+              <tr>
+                <th>เมนู</th>
+                <th>ราคาขาย</th>
+                <th>หัก GP</th>
+                <th>ต้นทุนรวม</th>
+                <th>กำไรสุทธิ</th>
+                <th>Margin</th>
+                <th>จัดการ</th>
+              </tr>
+            </thead>
+            <tbody id="tbody"></tbody>
+          </table>
+        </div>
 
-      <!-- Mobile List Cards -->
-      <div class="mobile-menu-list" id="mobileMenuList"></div>
+        <!-- Mobile Cards List -->
+        <div class="mobile-menu-list" id="mobileMenuList"></div>
+      </div>
     </section>
 
     <div class="footer-note">
-      * ข้อมูลทั้งหมดถูกบันทึกในเครื่องของคุณ (localStorage) ไม่ถูกส่งไปยังเซิร์ฟเวอร์ใด ๆ ทั้งสิ้น<br>
-      เกณฑ์กำไร: เขียว = margin ≥ 25% • เหลือง = 10–25% • แดง = ต่ำกว่า 10% หรือขาดทุน
+      * ข้อมูลทั้งหมดถูกจัดเก็บเฉพาะบนอุปกรณ์ของคุณ (localStorage) ไม่มีการส่งข้อมูลต้นทุนออกไปยังเซิร์ฟเวอร์ภายนอก<br>
+      เกณฑ์กำไร: เขียว = Margin ≥ 25% • ส้ม = 10–25% • แดง = ต่ำกว่า 10% หรือเข้าเนื้อ
     </div>
     <div class="credit">
-      สร้างขึ้นเพื่อช่วยร้านค้ารายย่อยคำนวณต้นทุน • ใช้งานฟรี 100%
+      EzyCalcu • เครื่องคำนวณกำไรเพื่อร้านค้าอาหารและเครื่องดื่ม • ใช้งานฟรี 100%
     </div>
   </main>
 
   <button type="button" class="mobile-bar" id="mobileBar" aria-label="ดูรายละเอียดกำไร">
-    <span class="mb-left"><small>กำไรจริง/จาน</small><b class="mb-value idle" id="mbProfit">฿0.00</b></span>
-    <span class="mb-right"><span class="pill s-idle" id="mbMargin">-</span><span class="mb-link">ดูรายละเอียด ↓</span></span>
+    <span class="mb-left"><small>กำไรจริงต่อจาน</small><b class="mb-value idle" id="mbProfit">฿0.00</b></span>
+    <span class="mb-right"><span class="pill s-idle" id="mbMargin">-</span><span class="mb-link">ดูสลิปสรุป ↓</span></span>
   </button>
 
-  <div class="toast" id="toast">คัดลอกข้อความสรุปแล้ว!</div>
+  <div class="toast" id="toast">บันทึกสำเร็จ</div>
 
   <script>
     const STORAGE_KEY = 'ezycalcu-menus';
     const $ = id => document.getElementById(id);
+
     // ==== HARDENING START
     const MAX_MENUS = 50, NAME_MAX = 50;
-    const LIMITS = {            // [min, max, label]
+    const LIMITS = {
       price:    [0, 100000, 'ราคาขาย'],
       cost:     [0, 100000, 'ค่าของ'],
       pack:     [0, 100000, 'ค่ากล่อง'],
@@ -884,7 +1225,6 @@
       const lim = LIMITS[id];
       return round2(Math.min(Math.max(v, lim[0]), lim[1]));
     }
-    // value used for calculation: always finite, in range, discount never above price
     const num = id => {
       let v = clampVal(id, $(id).value);
       if (id === 'discount') v = Math.min(v, clampVal('price', $('price').value));
@@ -932,9 +1272,7 @@
       const profit = net - cost - pack;
       const margin = price > 0 ? profit / price : 0;
       
-      // จุดคุ้มทุน: P * (1 - g) - D - C = 0  => P = (C + pack + D) / (1 - g)
       const breakEven = g < 1 ? (cost + pack + discount) / (1 - g) : Infinity;
-      // ราคาแนะนำ: P * (1 - g) - D - C = P * t => P * (1 - g - t) = C + pack + D
       const suggest = (1 - g - t) > 0 ? (cost + pack + discount) / (1 - g - t) : null;
       return { effectiveGp, gpFee, net, profit, margin, breakEven, suggest };
     }
@@ -945,11 +1283,11 @@
       if (margin >= 0.10) return 'warn';
       return 'bad';
     }
-    const labels = {
-      good: 'กำไรดี ✅',
-      warn: 'กำไรบาง ⚠️',
-      bad: 'เสี่ยงขาดทุน 🚨',
-      idle: 'กรอกข้อมูลเพื่อคำนวณ'
+    const statusMeta = {
+      good: { label: 'กำไรดีตามเป้า', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>' },
+      warn: { label: 'กำไรบาง ควรระวัง', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><path d="m21.73 18-8-14a2 2 0 0 0-3.48 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.73-3Z"/><line x1="12" y1="9" x2="12" y2="13"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>' },
+      bad:  { label: 'เสี่ยงเข้าเนื้อ / ขาดทุน', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>' },
+      idle: { label: 'กรอกข้อมูลเพื่อคำนวณ', icon: '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/></svg>' }
     };
 
     function readForm() {
@@ -978,9 +1316,12 @@
       updateVatLabel();
 
       $('profit').textContent = baht(r.profit);
-      $('profit').className = 'profit ' + lv;
-      $('status').textContent = d.price > 0 && r.profit < 0 ? 'ขาดทุน! ขายแล้วเข้าเนื้อ 🚨' : labels[lv];
-      $('status').className = 'status s-' + lv;
+      $('profit').className = 'profit-num ' + lv;
+      $('heroBox').className = 'hero-profit-box ' + lv;
+
+      const meta = statusMeta[lv];
+      $('status').className = 'status-badge s-' + lv;
+      $('status').innerHTML = meta.icon + '<span>' + (d.price > 0 && r.profit < 0 ? 'ขายแล้วเข้าเนื้อ ขาดทุน' : meta.label) + '</span>';
 
       $('bPrice').textContent = baht(d.price);
       $('bDiscount').textContent = '-' + baht(d.discount);
@@ -994,9 +1335,9 @@
       $('bPack').textContent = '-' + baht(d.pack);
       $('bMargin').textContent = (r.margin * 100).toFixed(1) + '%';
       
-      $('tBreak').textContent = isFinite(r.breakEven) ? baht(r.breakEven) + ' (ต่ำกว่านี้ขาดทุน)' : '-';
+      $('tBreak').textContent = isFinite(r.breakEven) ? baht(r.breakEven) : '-';
       $('tTargetPct').textContent = d.target;
-      $('tSuggest').textContent = r.suggest ? baht(r.suggest) : 'เป็นไปไม่ได้ (GP + margin รวมเกิน 100%)';
+      $('tSuggest').textContent = r.suggest ? baht(r.suggest) : 'เป็นไปไม่ได้';
 
       $('mbProfit').textContent = baht(r.profit);
       $('mbProfit').className = 'mb-value ' + lv;
@@ -1012,8 +1353,8 @@
       const mobileList = $('mobileMenuList');
 
       if (!rows.length) {
-        body.innerHTML = '<tr><td colspan="7" class="empty">ยังไม่มีเมนู — กรอกข้อมูลด้านบนแล้วกด "บันทึกเมนู"</td></tr>';
-        mobileList.innerHTML = '<div class="empty">ยังไม่มีเมนู — กรอกข้อมูลด้านบนแล้วกด "บันทึกเมนู"</div>';
+        body.innerHTML = '<tr><td colspan="7" class="empty">ยังไม่มีเมนูที่บันทึก — กรอกข้อมูลด้านบนแล้วกด "บันทึกเมนู"</td></tr>';
+        mobileList.innerHTML = '<div class="empty">ยังไม่มีเมนูที่บันทึก — กรอกข้อมูลด้านบนแล้วกด "บันทึกเมนู"</div>';
       } else {
         // Desktop Table
         body.innerHTML = rows.map(({ m, r }) => {
@@ -1023,11 +1364,17 @@
             <td>${baht(m.price)}</td>
             <td>${baht(r.gpFee)}</td>
             <td>${baht(m.cost + m.pack + m.discount)}</td>
-            <td><b style="color:var(--${lv === 'idle' ? 'muted' : lv})">${baht(r.profit)}</b></td>
+            <td><b style="color:var(--${lv === 'idle' ? 'text-muted' : lv + '-text'})">${baht(r.profit)}</b></td>
             <td><span class="pill s-${lv}">${(r.margin * 100).toFixed(1)}%</span></td>
             <td>
-              <button class="icon-btn" data-edit="${m.id}" title="แก้ไข">แก้ไข</button>
-              <button class="icon-btn del" data-del="${m.id}" title="ลบ">ลบ</button>
+              <button class="icon-btn" data-edit="${m.id}" title="แก้ไข">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                แก้ไข
+              </button>
+              <button class="icon-btn del" data-del="${m.id}" title="ลบ">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                ลบ
+              </button>
             </td>
           </tr>`;
         }).join('');
@@ -1039,7 +1386,7 @@
             <div class="mic-header">
               <div class="mic-title">${escapeHtml(m.name)}</div>
               <div class="mic-profit">
-                <b style="color:var(--${lv === 'idle' ? 'muted' : lv})">${baht(r.profit)}</b>
+                <b style="color:var(--${lv === 'idle' ? 'text-muted' : lv + '-text'})">${baht(r.profit)}</b>
                 <span class="pill s-${lv}">${(r.margin * 100).toFixed(1)}%</span>
               </div>
             </div>
@@ -1050,8 +1397,14 @@
               <div>จุดคุ้มทุน: <b>${isFinite(r.breakEven) ? baht(r.breakEven) : '-'}</b></div>
             </div>
             <div class="mic-actions">
-              <button class="icon-btn" data-edit="${m.id}">✏️ แก้ไข</button>
-              <button class="icon-btn del" data-del="${m.id}">🗑️ ลบ</button>
+              <button class="icon-btn" data-edit="${m.id}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg>
+                แก้ไข
+              </button>
+              <button class="icon-btn del" data-del="${m.id}">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 6h18M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2"/></svg>
+                ลบ
+              </button>
             </div>
           </div>`;
         }).join('');
@@ -1067,7 +1420,6 @@
       return s ? s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) : '';
     }
 
-
     function resetForm() {
       $('menuForm').reset();
       ['pack', 'discount'].forEach(i => $(i).value = 0);
@@ -1075,7 +1427,7 @@
       $('target').value = 25;
       $('vatCheckbox').checked = true;
       editingId = null;
-      $('saveBtn').textContent = '💾 บันทึกเมนู';
+      $('saveBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> บันทึกเมนู';
       $('editBanner').classList.remove('active');
       renderResult();
     }
@@ -1090,10 +1442,10 @@
       $('target').value = 25;
       $('vatCheckbox').checked = true;
       editingId = null;
-      $('saveBtn').textContent = '💾 บันทึกเมนู';
+      $('saveBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"/><polyline points="17 21 17 13 7 13 7 21"/><polyline points="7 3 7 8 15 8"/></svg> บันทึกเมนู';
       $('editBanner').classList.remove('active');
       renderResult();
-      showToast('โหลดข้อมูลตัวอย่างแล้ว 💡');
+      showToast('โหลดข้อมูลตัวอย่างแล้ว');
     }
 
     function showToast(msg) {
@@ -1104,7 +1456,7 @@
     }
 
     function copyText(text) {
-      const done = () => showToast('คัดลอกสรุปแล้ว พร้อมวางส่งใน LINE ✅');
+      const done = () => showToast('คัดลอกสรุปแล้ว พร้อมวางส่งใน LINE');
       const fallback = () => {
         const ta = document.createElement('textarea');
         ta.value = text;
@@ -1134,13 +1486,15 @@
         return;
       }
 
-      const text = `📊 สรุปกำไรต่อจาน (EzyCalcu): ${name}
-💵 ราคาขาย: ${baht(d.price)}
-📉 หัก GP ${d.hasVat ? (r.effectiveGp.toFixed(1) + '% (+VAT)') : (d.gp + '%')}: -${baht(r.gpFee)}
-📦 ต้นทุนวัตถุดิบ + กล่อง: -${baht(d.cost + d.pack)}
-💰 กำไรจริงต่อจาน: ${baht(r.profit)} (Margin ${(r.margin * 100).toFixed(1)}%)
-🎯 ราคาคุ้มทุน: ${isFinite(r.breakEven) ? baht(r.breakEven) : '-'}
-📈 ราคาแนะนำ (Margin ${d.target}%): ${r.suggest ? baht(r.suggest) : '-'}`;
+      const text = `สลิปสรุปกำไร (EzyCalcu): ${name}
+ราคาขาย: ${baht(d.price)}
+หัก ค่า GP ${d.hasVat ? (r.effectiveGp.toFixed(1) + '% รวม VAT') : (d.gp + '%')}: -${baht(r.gpFee)}
+เงินที่ร้านได้รับจริง: ${baht(r.net)}
+หัก ค่าของ (วัตถุดิบ): -${baht(d.cost)}
+หัก ค่ากล่อง/ถุง: -${baht(d.pack)}
+กำไรสุทธิต่อจาน: ${baht(r.profit)} (Margin ${(r.margin * 100).toFixed(1)}%)
+จุดคุ้มทุน: ${isFinite(r.breakEven) ? baht(r.breakEven) : '-'}
+ราคาแนะนำ: ${r.suggest ? baht(r.suggest) : '-'}`;
 
       if (navigator.share && matchMedia('(pointer: coarse)').matches) {
         navigator.share({ text }).catch(err => { if (!err || err.name !== 'AbortError') copyText(text); });
@@ -1158,13 +1512,13 @@
     let saving = false;
     $('menuForm').addEventListener('submit', e => {
       e.preventDefault();
-      if (saving) return;                       // กดรัว: รับแค่ครั้งแรก
+      if (saving) return;
       const name = cleanName($('name').value);
       if (!name) { showToast('กรุณาใส่ชื่อเมนู'); return; }
       const form = readForm();
       if (!(form.price > 0)) { showToast('กรุณาใส่ราคาขายมากกว่า 0'); return; }
       if (!editingId && menus.length >= MAX_MENUS) {
-        showToast('ครบ ' + MAX_MENUS + ' เมนูแล้ว ลบเมนูที่ไม่ใช้ก่อนนะ'); return;
+        showToast('ครบ ' + MAX_MENUS + ' เมนูแล้ว ลบเมนูที่ไม่ใช้ออกก่อน'); return;
       }
       const dupKey = x => x.name.toLowerCase() + '|' + x.price + '|' + x.cost;
       const item = {
@@ -1181,10 +1535,9 @@
       const ok = persist();
       renderTable();
       resetForm();
-      showToast(ok ? 'บันทึกเมนูสำเร็จ ✅' : 'เบราว์เซอร์ไม่ให้จำข้อมูล (โหมดส่วนตัว?) ข้อมูลจะหายเมื่อปิดหน้า ⚠️');
+      showToast(ok ? 'บันทึกเมนูสำเร็จ' : 'เบราว์เซอร์ไม่ให้จำข้อมูล (ข้อมูลจะหายเมื่อปิดหน้า)');
     });
 
-    // กันตัวเลขผิดปกติ: ตั้งเพดาน บล็อก e + - และปรับค่ากลับเข้าช่วงเมื่อกรอกเสร็จ
     function sanitizeField(id) {
       const el = $(id);
       if (el.value === '') return;
@@ -1192,7 +1545,7 @@
       if (id === 'discount') { const p = clampVal('price', $('price').value); if (p > 0) v = Math.min(v, p); }
       if (parseFloat(el.value) !== v) {
         el.value = v;
-        showToast('ปรับ' + LIMITS[id][2] + 'เป็น ' + v.toLocaleString('th-TH') + ' (ใส่ได้ ' + LIMITS[id][0] + '–' + LIMITS[id][1].toLocaleString('th-TH') + ')');
+        showToast('ปรับ' + LIMITS[id][2] + 'เป็น ' + v.toLocaleString('th-TH'));
         renderResult();
       }
     }
@@ -1225,8 +1578,8 @@
         if (!m) return;
         editingId = m.id;
         ['name', 'price', 'cost', 'pack', 'discount', 'gp', 'target'].forEach(k => $(k).value = m[k] !== undefined ? m[k] : 0);
-        $('vatCheckbox').checked = !!m.hasVat; // เมนูจากเวอร์ชันแรกคำนวณแบบไม่รวม VAT
-        $('saveBtn').textContent = '✏️ อัปเดตเมนู';
+        $('vatCheckbox').checked = !!m.hasVat;
+        $('saveBtn').innerHTML = '<svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z"/><path d="m15 5 4 4"/></svg> อัปเดตเมนู';
         $('editingName').textContent = m.name;
         $('editBanner').classList.add('active');
         renderResult();
@@ -1241,7 +1594,10 @@
       }
     }
 
-    $('tbody').addEventListener('click', e => handleEditOrDelete(e.target));
+    $('tbody').addEventListener('click', e => {
+      const btn = e.target.closest('button');
+      if (btn) handleEditOrDelete(btn);
+    });
     $('mobileMenuList').addEventListener('click', e => {
       const btn = e.target.closest('button');
       if (btn) handleEditOrDelete(btn);
@@ -1251,10 +1607,10 @@
       new IntersectionObserver(([entry]) => {
         resultVisible = entry.isIntersecting;
         updateMobileBar();
-      }, { threshold: 0.2 }).observe(document.querySelector('.result'));
+      }, { threshold: 0.2 }).observe(document.querySelector('.result-card'));
     }
     $('mobileBar').addEventListener('click', () =>
-      document.querySelector('.result').scrollIntoView({ behavior: 'smooth', block: 'start' }));
+      document.querySelector('.result-card').scrollIntoView({ behavior: 'smooth', block: 'start' }));
 
     // Initial render
     renderResult();
