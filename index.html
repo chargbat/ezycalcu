@@ -3,25 +3,25 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>เครื่องคำนวณกำไรจริงต่อเมนู Grab | รู้ต้นทุน รู้กำไรจริง (รวมหัก GP + VAT)</title>
-  <meta name="description" content="เครื่องคำนวณกำไรจริงต่อจานสำหรับร้านค้ารายย่อยบน Grab Food รวมหักค่า GP 30% บวก VAT 7% ต้นทุนวัตถุดิบ บรรจุภัณฑ์ และส่วนลด พร้อมคำนวณราคาคุ้มทุน">
+  <title>EzyCalcu | เครื่องคำนวณกำไรต่อจาน & เดลิเวอรี่ (รู้ต้นทุน รู้กำไรจริง)</title>
+  <meta name="description" content="EzyCalcu เครื่องคำนวณกำไรจริงต่อจานสำหรับร้านอาหารและเดลิเวอรี่ รวมหักค่า GP บวก VAT ต้นทุนวัตถุดิบ บรรจุภัณฑ์ และส่วนลด พร้อมคำนวณราคาคุ้มทุน">
   
   <!-- Open Graph / Facebook / LINE -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="เครื่องคำนวณกำไรจริงต่อเมนู Grab | รู้ต้นทุน รู้กำไร">
-  <meta property="og:description" content="ขาย 1 จานได้กำไรกี่บาทกันแน่? หัก GP 30% (+VAT 7%) ต้นทุน กล่อง ส่วนลด เหลือเงินสุทธิเท่าไร คำนวณฟรี!">
-  <meta property="og:url" content="https://chargcharg2308-cloud.github.io/grab-profit/">
-  <meta property="og:image" content="https://chargcharg2308-cloud.github.io/grab-profit/og-image.png">
+  <meta property="og:title" content="EzyCalcu | เครื่องคำนวณกำไรต่อจาน & เดลิเวอรี่">
+  <meta property="og:description" content="ขาย 1 จานได้กำไรกี่บาทกันแน่? หักค่า GP (+VAT) ต้นทุน กล่อง ส่วนลด เหลือเงินสุทธิเท่าไร คำนวณฟรีด้วย EzyCalcu">
+  <meta property="og:url" content="https://chargbat.github.io/ezycalcu/">
+  <meta property="og:image" content="https://chargbat.github.io/ezycalcu/og-image.png">
   <meta property="og:image:width" content="1200">
   <meta property="og:image:height" content="630">
   <meta property="og:locale" content="th_TH">
-  <link rel="canonical" href="https://chargcharg2308-cloud.github.io/grab-profit/">
+  <link rel="canonical" href="https://chargbat.github.io/ezycalcu/">
   
   <!-- Twitter -->
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="เครื่องคำนวณกำไรจริงต่อเมนู Grab">
-  <meta name="twitter:description" content="คำนวณกำไรสุทธิต่อจานบน Grab รวมหัก GP + VAT 7% บรรจุภัณฑ์ และต้นทุน">
-  <meta name="twitter:image" content="https://chargcharg2308-cloud.github.io/grab-profit/og-image.png">
+  <meta name="twitter:title" content="EzyCalcu | เครื่องคำนวณกำไรต่อจาน & เดลิเวอรี่">
+  <meta name="twitter:description" content="ขาย 1 จานได้กำไรกี่บาทกันแน่? หักค่า GP (+VAT) ต้นทุน กล่อง ส่วนลด เหลือเงินสุทธิเท่าไร คำนวณฟรีด้วย EzyCalcu">
+  <meta name="twitter:image" content="https://chargbat.github.io/ezycalcu/og-image.png">
   
   <!-- Theme Color for Mobile Browsers -->
   <meta name="theme-color" content="#0d111c">
@@ -675,7 +675,7 @@
 <body>
   <main class="wrap">
     <header>
-      <span class="badge">🍱 สำหรับร้านค้าบน Grab Food</span>
+      <span class="badge">🍱 EzyCalcu • คำนวณต้นทุน & กำไรจริง</span>
       <h1>ขาย 1 จาน ได้กำไรจริงกี่บาท?</h1>
       <p>รู้ทันทีหลังหักค่า GP 30% (+VAT 7%) ต้นทุนวัตถุดิบ บรรจุภัณฑ์ และส่วนลด</p>
     </header>
@@ -700,7 +700,7 @@
 
         <div class="row">
           <div class="field">
-            <label for="price">ราคาขายบน Grab</label>
+            <label for="price">ราคาขาย (เดลิเวอรี่/หน้าร้าน)</label>
             <div class="input-wrap">
               <input type="number" id="price" min="0" step="any" inputmode="decimal" placeholder="70" required>
               <span>บาท</span>
@@ -734,7 +734,7 @@
 
         <div class="row">
           <div class="field">
-            <label for="gp">ค่า GP ของ Grab</label>
+            <label for="gp">ค่า GP (เช่น 30% หรือ 0% ถ้าขายหน้าร้าน)</label>
             <div class="input-wrap">
               <input type="number" id="gp" min="0" max="99" step="any" inputmode="decimal" value="30">
               <span>%</span>
@@ -755,7 +755,7 @@
             <input type="checkbox" id="vatCheckbox" checked>
             <div>
               <span>รวม VAT 7% ของค่า GP (แนะนำ)</span>
-              <div class="vat-desc">Grab คิด VAT 7% ของค่า GP ทำให้ GP จริงคือ <span class="vat-highlight" id="vatLabel">32.10%</span></div>
+              <div class="vat-desc">เดลิเวอรี่คิด VAT 7% ของ GP ทำให้ GP หักจริงคือ <span class="vat-highlight" id="vatLabel">32.10%</span></div>
             </div>
           </label>
         </div>
@@ -774,7 +774,7 @@
         <div class="status s-idle" id="status">กรอกข้อมูลเพื่อคำนวณ</div>
 
         <div class="breakdown">
-          <div class="line"><span>ราคาขายบน Grab</span><b id="bPrice">฿0.00</b></div>
+          <div class="line"><span>ราคาขาย</span><b id="bPrice">฿0.00</b></div>
           <div class="line neg"><span>หัก ส่วนลดร้าน</span><b id="bDiscount">-฿0.00</b></div>
           <div class="line neg"><span id="lblGpBreakdown">หัก ค่า GP (32.1%)</span><b id="bGp">-฿0.00</b></div>
           <div class="line"><span>= รายได้สุทธิถึงร้าน</span><b id="bNet">฿0.00</b></div>
@@ -790,7 +790,7 @@
 
         <div class="share-btn-wrap">
           <button type="button" class="share-btn" id="copyShareBtn">
-            <span>📤 แชร์สรุปกำไร (ส่งต่อใน LINE)</span>
+            <span>📤 แชร์สรุปกำไร (EzyCalcu)</span>
           </button>
         </div>
       </div>
@@ -848,12 +848,12 @@
   <div class="toast" id="toast">คัดลอกข้อความสรุปแล้ว!</div>
 
   <script>
-    const STORAGE_KEY = 'grab-profit-menus-v2';
+    const STORAGE_KEY = 'ezycalcu-menus';
     const $ = id => document.getElementById(id);
     const baht = n => (n < 0 ? '-' : '') + '฿' + Math.abs(n).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
     const num = id => parseFloat($(id).value) || 0;
 
-    let menus = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem('grab-profit-menus') || '[]');
+    let menus = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem('grab-profit-menus-v2') || localStorage.getItem('grab-profit-menus') || '[]');
     let editingId = null;
     let hasInput = false, resultVisible = false;
 
@@ -1073,7 +1073,7 @@
         return;
       }
 
-      const text = `📊 สรุปกำไร Grab: ${name}
+      const text = `📊 สรุปกำไรต่อจาน (EzyCalcu): ${name}
 💵 ราคาขาย: ${baht(d.price)}
 📉 หัก GP ${d.hasVat ? (r.effectiveGp.toFixed(1) + '% (+VAT)') : (d.gp + '%')}: -${baht(r.gpFee)}
 📦 ต้นทุนวัตถุดิบ + กล่อง: -${baht(d.cost + d.pack)}
