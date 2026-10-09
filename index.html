@@ -24,8 +24,8 @@
   <meta name="twitter:image" content="https://chargbat.github.io/ezycalcu/og-image.png">
   
   <!-- Theme Color for Mobile Browsers -->
-  <meta name="theme-color" content="#0d111c">
-  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="theme-color" content="#f4faf6">
+  <meta name="apple-mobile-web-app-status-bar-style" content="default">
 
   <!-- Favicon (Inline SVG) -->
   <link rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><text y=%22.9em%22 font-size=%2290%22>🍱</text></svg>">
@@ -38,18 +38,18 @@
 
   <style>
     :root {
-      --bg: hsl(230, 28%, 8%);
-      --card: hsla(230, 30%, 16%, 0.65);
-      --card-solid: hsl(230, 26%, 14%);
-      --border: hsla(220, 40%, 80%, 0.12);
-      --border-focus: hsla(158, 78%, 48%, 0.5);
-      --text: hsl(220, 30%, 96%);
-      --muted: hsl(222, 16%, 68%);
-      --accent: hsl(158, 78%, 48%);
-      --accent-2: hsl(190, 85%, 55%);
-      --good: hsl(152, 70%, 50%);
-      --warn: hsl(42, 95%, 58%);
-      --bad: hsl(355, 85%, 62%);
+      --bg: hsl(150, 30%, 97%);
+      --card: hsl(0, 0%, 100%);
+      --card-solid: hsl(0, 0%, 100%);
+      --border: hsla(155, 25%, 28%, 0.16);
+      --border-focus: hsla(160, 90%, 30%, 0.5);
+      --text: hsl(160, 30%, 10%);
+      --muted: hsl(160, 10%, 36%);
+      --accent: hsl(161, 94%, 30%);
+      --accent-2: hsl(174, 80%, 30%);
+      --good: hsl(152, 78%, 27%);
+      --warn: hsl(28, 95%, 38%);
+      --bad: hsl(355, 78%, 44%);
       --radius: 20px;
     }
 
@@ -64,8 +64,8 @@
       font-family: 'Prompt', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
       color: var(--text);
       background:
-        radial-gradient(900px 500px at 10% -10%, hsla(158, 80%, 40%, 0.2), transparent 60%),
-        radial-gradient(800px 500px at 100% 0%, hsla(235, 80%, 55%, 0.2), transparent 60%),
+        radial-gradient(900px 500px at 10% -10%, hsla(160, 85%, 45%, 0.14), transparent 60%),
+        radial-gradient(800px 500px at 100% 0%, hsla(28, 95%, 60%, 0.13), transparent 60%),
         var(--bg);
       min-height: 100vh;
       line-height: 1.5;
@@ -132,7 +132,7 @@
       padding: 24px;
       backdrop-filter: blur(16px);
       -webkit-backdrop-filter: blur(16px);
-      box-shadow: 0 20px 45px -20px rgba(0,0,0,0.7);
+      box-shadow: 0 12px 32px -16px rgba(16,70,48,0.28);
     }
     @media (max-width: 480px) {
       .card {
@@ -230,7 +230,7 @@
       font-family: inherit;
       font-size: 16px;
       color: var(--text);
-      background: hsla(230, 30%, 10%, 0.75);
+      background: #fff;
       border: 1px solid var(--border);
       border-radius: 12px;
       outline: none;
@@ -242,7 +242,7 @@
     }
     input:focus {
       border-color: var(--accent);
-      box-shadow: 0 0 0 3px hsla(158, 78%, 48%, 0.2);
+      box-shadow: 0 0 0 3px hsla(160, 90%, 30%, 0.2);
     }
     /* Remove Spinners */
     input[type=number]::-webkit-inner-spin-button,
@@ -256,7 +256,7 @@
 
     /* VAT Checkbox Box */
     .vat-box {
-      background: hsla(220, 30%, 20%, 0.4);
+      background: hsl(40, 70%, 95%);
       border: 1px dashed var(--border);
       border-radius: 12px;
       padding: 10px 14px;
@@ -311,19 +311,19 @@
       transform: scale(.98);
     }
     .primary {
-      color: hsl(230, 40%, 8%);
+      color: #fff;
       background: linear-gradient(90deg, var(--accent), var(--accent-2));
-      box-shadow: 0 10px 25px -10px hsla(158, 80%, 50%, 0.7);
+      box-shadow: 0 10px 25px -10px hsla(160, 90%, 30%, 0.45);
       flex: 1;
       min-width: 140px;
     }
     .ghost {
       color: var(--text);
-      background: hsla(220, 40%, 80%, 0.08);
+      background: hsla(150, 25%, 25%, 0.064);
       border: 1px solid var(--border);
     }
     .ghost:hover {
-      background: hsla(220, 40%, 80%, 0.16);
+      background: hsla(150, 25%, 25%, 0.128);
     }
 
     /* Result Panel */
@@ -397,7 +397,7 @@
       padding: 12px 14px;
       border-radius: 12px;
       font-size: 13px;
-      background: hsla(220, 40%, 80%, 0.06);
+      background: hsla(150, 25%, 25%, 0.048);
       border: 1px solid var(--border);
     }
     .tip strong {
@@ -409,7 +409,7 @@
     }
     .share-btn {
       width: 100%;
-      background: hsla(220, 40%, 80%, 0.08);
+      background: hsla(150, 25%, 25%, 0.064);
       border: 1px solid var(--border);
       color: var(--text);
       font-size: 14px;
@@ -421,7 +421,7 @@
       gap: 8px;
     }
     .share-btn:hover {
-      background: hsla(220, 40%, 80%, 0.15);
+      background: hsla(150, 25%, 25%, 0.12);
     }
 
     /* Table & Card List Section */
@@ -449,7 +449,7 @@
     .sum-box {
       padding: 12px 14px;
       border-radius: 14px;
-      background: hsla(220, 40%, 80%, 0.06);
+      background: hsla(150, 25%, 25%, 0.048);
       border: 1px solid var(--border);
     }
     .sum-box small {
@@ -488,7 +488,7 @@
       text-align: left;
     }
     tbody tr:hover {
-      background: hsla(220, 40%, 80%, 0.05);
+      background: hsla(150, 25%, 25%, 0.04);
     }
     .pill {
       display: inline-block;
@@ -509,7 +509,7 @@
     }
     .icon-btn:hover {
       color: var(--text);
-      background: hsla(220, 40%, 80%, 0.1);
+      background: hsla(150, 25%, 25%, 0.08);
     }
     .icon-btn.del:hover {
       color: var(--bad);
@@ -522,7 +522,7 @@
       gap: 12px;
     }
     .menu-item-card {
-      background: hsla(220, 30%, 14%, 0.7);
+      background: #fff;
       border: 1px solid var(--border);
       border-radius: 14px;
       padding: 14px;
@@ -554,7 +554,7 @@
       gap: 6px;
       font-size: 12px;
       color: var(--muted);
-      background: hsla(220, 30%, 10%, 0.4);
+      background: hsl(150, 25%, 96%);
       padding: 8px 10px;
       border-radius: 8px;
     }
@@ -593,7 +593,7 @@
       top: calc(16px + env(safe-area-inset-top));
       left: 50%;
       transform: translateX(-50%) translateY(-120px);
-      background: hsla(230, 30%, 14%, 0.95);
+      background: hsla(160, 35%, 12%, 0.96);
       border: 1px solid var(--accent);
       color: var(--text);
       padding: 10px 20px;
@@ -626,12 +626,12 @@
       min-height: 60px;
       text-align: left;
       color: var(--text);
-      background: hsla(230, 30%, 12%, 0.92);
+      background: hsla(0, 0%, 100%, 0.97);
       border: 1px solid var(--border-focus);
       border-radius: 16px;
       backdrop-filter: blur(14px);
       -webkit-backdrop-filter: blur(14px);
-      box-shadow: 0 12px 30px -8px rgba(0,0,0,.7);
+      box-shadow: 0 12px 30px -8px rgba(16,70,48,.3);
       opacity: 0;
       transform: translateY(24px);
       pointer-events: none;
@@ -670,6 +670,19 @@
       color: var(--accent);
       text-decoration: none;
     }
+    /* ===== Friendly Food POS: big, chunky, readable in sunlight ===== */
+    :root { color-scheme: light; }
+    input { min-height: 54px; border-radius: 16px; font-weight: 500; }
+    button { min-height: 52px; border-radius: 16px; }
+    .primary { font-size: 17px; }
+    .icon-btn { min-height: 40px; }
+    .mic-actions button { min-height: 44px; }
+    .profit { font-size: clamp(54px, 15vw, 88px); font-weight: 800; letter-spacing: -.02em; overflow-wrap: anywhere; }
+    .mb-value { font-size: 22px; }
+    .toast { color: #fff; }
+    .mic-title, td:first-child strong { overflow-wrap: anywhere; word-break: break-word; }
+    td:first-child { max-width: 220px; }
+    .status { font-weight: 600; }
   </style>
 </head>
 <body>
@@ -707,7 +720,7 @@
             </div>
           </div>
           <div class="field">
-            <label for="cost">ต้นทุนวัตถุดิบ</label>
+            <label for="cost">ค่าของ / วัตถุดิบ ต่อจาน</label>
             <div class="input-wrap">
               <input type="number" id="cost" min="0" step="any" inputmode="decimal" placeholder="25" required>
               <span>บาท</span>
@@ -741,7 +754,7 @@
             </div>
           </div>
           <div class="field">
-            <label for="target">Margin ที่อยากได้</label>
+            <label for="target">อยากได้กำไรกี่ %</label>
             <div class="input-wrap">
               <input type="number" id="target" min="0" max="90" step="any" inputmode="decimal" value="25">
               <span>%</span>
@@ -777,10 +790,10 @@
           <div class="line"><span>ราคาขาย</span><b id="bPrice">฿0.00</b></div>
           <div class="line neg"><span>หัก ส่วนลดร้าน</span><b id="bDiscount">-฿0.00</b></div>
           <div class="line neg"><span id="lblGpBreakdown">หัก ค่า GP (32.1%)</span><b id="bGp">-฿0.00</b></div>
-          <div class="line"><span>= รายได้สุทธิถึงร้าน</span><b id="bNet">฿0.00</b></div>
-          <div class="line neg"><span>หัก ต้นทุนวัตถุดิบ</span><b id="bCost">-฿0.00</b></div>
-          <div class="line neg"><span>หัก บรรจุภัณฑ์</span><b id="bPack">-฿0.00</b></div>
-          <div class="line total"><span>Margin (อัตรากำไร)</span><b id="bMargin">0.0%</b></div>
+          <div class="line"><span>= เงินที่ร้านได้รับจริง</span><b id="bNet">฿0.00</b></div>
+          <div class="line neg"><span>หัก ค่าของ (วัตถุดิบ)</span><b id="bCost">-฿0.00</b></div>
+          <div class="line neg"><span>หัก ค่ากล่อง/ถุง</span><b id="bPack">-฿0.00</b></div>
+          <div class="line total"><span>เปอร์เซ็นต์กำไร</span><b id="bMargin">0.0%</b></div>
         </div>
 
         <div class="tips">
@@ -850,10 +863,59 @@
   <script>
     const STORAGE_KEY = 'ezycalcu-menus';
     const $ = id => document.getElementById(id);
-    const baht = n => (n < 0 ? '-' : '') + '฿' + Math.abs(n).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
-    const num = id => parseFloat($(id).value) || 0;
+    // ==== HARDENING START
+    const MAX_MENUS = 50, NAME_MAX = 50;
+    const LIMITS = {            // [min, max, label]
+      price:    [0, 100000, 'ราคาขาย'],
+      cost:     [0, 100000, 'ค่าของ'],
+      pack:     [0, 100000, 'ค่ากล่อง'],
+      discount: [0, 100000, 'ส่วนลด'],
+      gp:       [0, 60,     'ค่า GP'],
+      target:   [0, 80,     'กำไรที่อยากได้']
+    };
+    const round2 = n => Math.round(n * 100) / 100;
+    const baht = n => {
+      if (!isFinite(n)) return '-';
+      return (n < 0 ? '-' : '') + '฿' + Math.abs(n).toLocaleString('th-TH', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+    };
+    function clampVal(id, raw) {
+      let v = parseFloat(raw);
+      if (!isFinite(v)) v = 0;
+      const lim = LIMITS[id];
+      return round2(Math.min(Math.max(v, lim[0]), lim[1]));
+    }
+    // value used for calculation: always finite, in range, discount never above price
+    const num = id => {
+      let v = clampVal(id, $(id).value);
+      if (id === 'discount') v = Math.min(v, clampVal('price', $('price').value));
+      return v;
+    };
+    const cleanName = s => String(s == null ? '' : s).replace(/\s+/g, ' ').trim().slice(0, NAME_MAX);
+    function sanitizeMenu(m) {
+      if (!m || typeof m !== 'object') return null;
+      const name = cleanName(m.name);
+      if (!name) return null;
+      const out = { id: String(m.id == null ? '' : m.id).replace(/[^\w-]/g, '') || ('m' + Math.random().toString(36).slice(2, 9)), name };
+      Object.keys(LIMITS).forEach(k => { out[k] = clampVal(k, m[k]); });
+      out.discount = Math.min(out.discount, out.price);
+      out.hasVat = !!m.hasVat;
+      return out;
+    }
+    function loadMenus() {
+      try {
+        const raw = localStorage.getItem(STORAGE_KEY) || localStorage.getItem('grab-profit-menus-v2') || localStorage.getItem('grab-profit-menus') || '[]';
+        const arr = JSON.parse(raw);
+        if (!Array.isArray(arr)) return [];
+        return arr.map(sanitizeMenu).filter(Boolean).slice(0, MAX_MENUS);
+      } catch (e) { return []; }
+    }
+    function persist() {
+      try { localStorage.setItem(STORAGE_KEY, JSON.stringify(menus)); return true; }
+      catch (e) { return false; }
+    }
+    // ==== HARDENING END
 
-    let menus = JSON.parse(localStorage.getItem(STORAGE_KEY) || localStorage.getItem('grab-profit-menus-v2') || localStorage.getItem('grab-profit-menus') || '[]');
+    let menus = loadMenus();
     let editingId = null;
     let hasInput = false, resultVisible = false;
 
@@ -996,7 +1058,7 @@
       }
 
       const n = rows.length;
-      $('sCount').textContent = n;
+      $('sCount').textContent = n + '/' + MAX_MENUS;
       $('sAvg').textContent = baht(n ? rows.reduce((s, x) => s + x.r.profit, 0) / n : 0);
       $('sLoss').textContent = rows.filter(x => x.r.profit < 0).length;
     }
@@ -1005,7 +1067,6 @@
       return s ? s.replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c])) : '';
     }
 
-    const persist = () => localStorage.setItem(STORAGE_KEY, JSON.stringify(menus));
 
     function resetForm() {
       $('menuForm').reset();
@@ -1094,19 +1155,53 @@
     $('demoBtn').addEventListener('click', loadDemo);
     $('copyShareBtn').addEventListener('click', copySummary);
 
+    let saving = false;
     $('menuForm').addEventListener('submit', e => {
       e.preventDefault();
+      if (saving) return;                       // กดรัว: รับแค่ครั้งแรก
+      const name = cleanName($('name').value);
+      if (!name) { showToast('กรุณาใส่ชื่อเมนู'); return; }
+      const form = readForm();
+      if (!(form.price > 0)) { showToast('กรุณาใส่ราคาขายมากกว่า 0'); return; }
+      if (!editingId && menus.length >= MAX_MENUS) {
+        showToast('ครบ ' + MAX_MENUS + ' เมนูแล้ว ลบเมนูที่ไม่ใช้ก่อนนะ'); return;
+      }
+      const dupKey = x => x.name.toLowerCase() + '|' + x.price + '|' + x.cost;
       const item = {
-        id: editingId || Date.now(),
-        name: $('name').value.trim(),
-        ...readForm()
+        id: editingId || (Date.now().toString(36) + Math.random().toString(36).slice(2, 6)),
+        name,
+        ...form
       };
-      if (!item.name) return;
+      if (!editingId && menus.some(m => dupKey(m) === dupKey(item))) {
+        showToast('มีเมนูนี้อยู่แล้ว (ชื่อ ราคา ต้นทุนเหมือนกัน)'); return;
+      }
+      saving = true; $('saveBtn').disabled = true;
+      setTimeout(() => { saving = false; $('saveBtn').disabled = false; }, 600);
       menus = editingId ? menus.map(m => m.id === editingId ? item : m) : [...menus, item];
-      persist();
+      const ok = persist();
       renderTable();
       resetForm();
-      showToast('บันทึกเมนูสำเร็จ ✅');
+      showToast(ok ? 'บันทึกเมนูสำเร็จ ✅' : 'เบราว์เซอร์ไม่ให้จำข้อมูล (โหมดส่วนตัว?) ข้อมูลจะหายเมื่อปิดหน้า ⚠️');
+    });
+
+    // กันตัวเลขผิดปกติ: ตั้งเพดาน บล็อก e + - และปรับค่ากลับเข้าช่วงเมื่อกรอกเสร็จ
+    function sanitizeField(id) {
+      const el = $(id);
+      if (el.value === '') return;
+      let v = clampVal(id, el.value);
+      if (id === 'discount') { const p = clampVal('price', $('price').value); if (p > 0) v = Math.min(v, p); }
+      if (parseFloat(el.value) !== v) {
+        el.value = v;
+        showToast('ปรับ' + LIMITS[id][2] + 'เป็น ' + v.toLocaleString('th-TH') + ' (ใส่ได้ ' + LIMITS[id][0] + '–' + LIMITS[id][1].toLocaleString('th-TH') + ')');
+        renderResult();
+      }
+    }
+    $('name').maxLength = NAME_MAX;
+    Object.keys(LIMITS).forEach(id => {
+      const el = $(id);
+      el.min = LIMITS[id][0]; el.max = LIMITS[id][1];
+      el.addEventListener('keydown', ev => { if (['e', 'E', '+', '-'].includes(ev.key)) ev.preventDefault(); });
+      el.addEventListener('change', () => sanitizeField(id));
     });
 
     $('resetBtn').addEventListener('click', resetForm);
